@@ -21,23 +21,36 @@ sys.path.append(parent_dir+"/singly_linked_list")
 # pylint: disable=import-error
 from singly_linked_list import LinkedList  # nopep8
 
-# List (array) implementation:
 class Queue:
     def __init__(self):
-        self.size = 0
-        self.storage = []
+        self.storage = LinkedList()
 
     def __len__(self):
         return len(self.storage)
 
     def enqueue(self, value):
-        self.storage.append(value)
+        self.storage.add_to_tail(value)
 
     def dequeue(self):
-        if len(self.storage) is 0:
-            return None
-        elif len(self.storage) is 1:
-            return self.storage.pop()
-        else:
-            first, *self.storage = self.storage
-            return first
+        return self.storage.remove_head()
+
+
+# List (array) implementation:
+# class Queue:
+#     def __init__(self):
+#         self.storage = []
+
+#     def __len__(self):
+#         return len(self.storage)
+
+#     def enqueue(self, value):
+#         self.storage.append(value)
+
+#     def dequeue(self):
+#         if len(self.storage) is 0:
+#             return None
+#         elif len(self.storage) is 1:
+#             return self.storage.pop()
+#         else:
+#             first, *self.storage = self.storage
+#             return first
