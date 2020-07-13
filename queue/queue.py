@@ -25,7 +25,7 @@ from singly_linked_list import LinkedList  # nopep8
 from stack import Stack  # nopep8
 
 
-# Stretch - More efficient stack implementation
+# Stretch - Fancier stack implementation
 class Queue:
     def __init__(self):
         self.activeStack = Stack()
@@ -59,7 +59,7 @@ class Queue:
         # Flip over the (top half - 1) of the stack
         for _ in range((length-1)//2):
             self.inactiveStack.push(self.activeStack.pop())
-        # Extract the middle (which is the oldest)
+        # Extract the middle value (which is the oldest)
         return_value = self.activeStack.pop()
         # Flip the top of the stack back over
         for _ in range(len(self.inactiveStack)):
@@ -92,18 +92,23 @@ class Queue:
 #                 self.activeStack.push(self.inactiveStack.pop())
 #             return return_value
 
-# LinkedList implementation
+#LinkedList implementation
 # class Queue:
 #     def __init__(self):
+#         self.size = 0
 #         self.storage = LinkedList()
 
 #     def __len__(self):
-#         return len(self.storage)
+#         return self.size
 
 #     def enqueue(self, value):
 #         self.storage.add_to_tail(value)
+#         self.size += 1
 
 #     def dequeue(self):
+#         if self.size is 0:
+#             return None
+#         self.size -= 1
 #         return self.storage.remove_head()
 
 
