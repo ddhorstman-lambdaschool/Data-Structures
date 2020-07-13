@@ -18,6 +18,14 @@ class LinkedList:
         self.head = None
         self.tail = None
 
+    def __len__(self):
+        length = 0
+        current_node = self.head
+        while current_node:
+            length += 1
+            current_node = current_node.get_next()
+        return length
+
     def add_to_tail(self, value):
         new_node = Node(value)
         # If list is empty, new entry will be both head and tail
@@ -35,7 +43,7 @@ class LinkedList:
         if current_head is None:
             return None
         # Single-entry list
-        elif self.head is self.tail:
+        elif current_head is self.tail:
             self.head = self.tail = None
         # Multiple-entry list
         else:
@@ -49,18 +57,23 @@ class LinkedList:
         # Empty list
         if current_tail is None:
             return None
-        # Non-empty list
-        current_node = self.head
-        while current_node.get_next() is not self.tail:
-            current_node = current_node.get_next()
-        self.tail = current_node
+        # Single-entry list
+        elif current_tail is self.head:
+            self.head = self.tail = None
+            return current_tail.get_value()
+        # Multiple-entry list
+        else:
+            current_node = self.head
+            while current_node.get_next() is not self.tail:
+                current_node = current_node.get_next()
+            self.tail = current_node
+            current_node.set_next(None)
 
-        return current_tail.get_value()
+            return current_tail.get_value()
 
     def contains(self, value):
         current_node = self.head
 
-        # Traverse all valid Nodes in the list
         while current_node:
             if current_node.get_value() is value:
                 return True
@@ -71,7 +84,7 @@ class LinkedList:
     def get_max(self):
         if not self.head:
             return None
-            
+
         max_value = self.head.get_value()
         current_node = self.head.get_next()
 
