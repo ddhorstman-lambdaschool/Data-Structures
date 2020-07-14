@@ -120,7 +120,7 @@ class DoublyLinkedList:
 
     def move_to_front(self, node):
         # One element or first element: no-op
-        if self.length is 1 or node.prev is None:
+        if self.length == 1 or not node or not node.prev:
             return
         # Last element: update tail
         if node is self.tail:
@@ -139,7 +139,19 @@ class DoublyLinkedList:
     """
 
     def move_to_end(self, node):
-        pass
+        # One element or last element: no-op
+        if self.length == 1 or not node or not node.next:
+            return
+        # First element: update head
+        if node is self.head:
+            self.head = node.next
+        # Not first: prev points to next
+        else:
+            node.prev.next = node.next
+        # Update ref from next, remove, and re-add to tail
+        node.next.prev = node.prev
+        self.length -= 1
+        self.add_to_tail(node.value)
 
     """
     Deletes the input node from the List, preserving the 
@@ -147,7 +159,25 @@ class DoublyLinkedList:
     """
 
     def delete(self, node):
-        pass
+        # No node: no-op
+        if not node:
+            return None
+        # One element: clear list
+        if self.length == 1:
+            self.head = self.tail = None
+            self.length = 0
+            return node.value
+        # Multiple elements:
+        self.length -= 1
+        if self.head is node:
+            self.head = node.next
+        else:
+            node.prev.next = node.next
+        if self.tail is node:
+            self.tail = node.prev
+        else:
+            node.next.prev = node.prev
+        return node.value
 
     """
     Finds and returns the maximum value of all the nodes 
@@ -155,4 +185,10 @@ class DoublyLinkedList:
     """
 
     def get_max(self):
-        pass
+        max = 0 if self.head else None
+        current = self.head
+        while current:
+            if current.value > max:
+                max = current.value
+            current = current.next
+        return max
