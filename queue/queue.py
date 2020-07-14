@@ -17,8 +17,8 @@ Stretch: What if you could only use instances of your Stack class to implement t
 import os
 import sys
 parent_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-sys.path.append(parent_dir+"/singly_linked_list")
-sys.path.append(parent_dir+"/stack")
+sys.path.append(os.path.join(parent_dir, "singly_linked_list"))
+sys.path.append(os.path.join(parent_dir, "stack"))
 # pylint: disable=import-error
 from singly_linked_list import LinkedList  # nopep8
 # pylint: disable=import-error
