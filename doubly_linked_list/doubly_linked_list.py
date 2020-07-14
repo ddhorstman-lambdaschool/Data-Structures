@@ -28,11 +28,13 @@ class DoublyLinkedList:
     """
     def add_to_head(self, value):
         new_node = ListNode(value, next=self.head or None)
+        # Non-empty list: old head points to new head
         if self.head:
             self.head.prev = new_node
-        self.head = new_node
-        if not self.tail:
+        # Empty list: new head is also new tail
+        else:
             self.tail = new_node
+        self.head = new_node
         self.length += 1
         
     """
@@ -42,12 +44,15 @@ class DoublyLinkedList:
     """
     def remove_from_head(self):
         old_head = self.head
+        # Empty list: no-op
         if not old_head:
             return None
+        # Single-element list: empty out list
         if old_head is self.tail:
-            self.tail = None
-        self.head = old_head.next
-        if self.head:
+            self.tail = self.head = None
+        # Multi-element list: assign new head
+        else:
+            self.head = old_head.next
             self.head.prev = None
         self.length -=1
         return old_head.value
@@ -59,7 +64,15 @@ class DoublyLinkedList:
     the old tail node's next pointer accordingly.
     """
     def add_to_tail(self, value):
-        pass
+        new_node = ListNode(value, prev=self.tail or None)
+        # Non-empty list: old tail points to new tail
+        if self.tail:
+            self.tail.next = new_node
+        # Empty list: new tail is also new head
+        else:
+            self.head = new_node
+        self.tail = new_node
+        self.length += 1
             
     """
     Removes the List's current tail node, making the 
