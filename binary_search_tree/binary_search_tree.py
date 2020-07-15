@@ -9,8 +9,7 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
-
-
+from queue import Queue
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -74,14 +73,15 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        nodes = [node]
+        nodes = Queue()
+        nodes.enqueue(node)
         while len(nodes) > 0:
-            current = nodes.pop(0)
+            current = nodes.dequeue()
             print(current)
             if current.left:
-                nodes.append(current.left)
+                nodes.enqueue(current.left)
             if current.right:
-                nodes.append(current.right)
+                nodes.enqueue(current.right)
 
 
 
