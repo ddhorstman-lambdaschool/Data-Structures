@@ -19,7 +19,7 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        return self.insert_value(self,value)
+        return self.insert_value(self, value)
 
     def insert_value(self, node, value):
         if value < node.value:
@@ -48,8 +48,8 @@ class BSTNode:
             return self.search_for_value(node.right, value)
         if node.value > value:
             return self.search_for_value(node.left, value)
-    # Return the maximum value found in the tree
 
+    # Return the maximum value found in the tree
     def get_max(self):
         current = self
         while current.right:
@@ -57,14 +57,21 @@ class BSTNode:
         return current.value
 
     # Call the function `fn` on the value of each node
-
     def for_each(self, fn):
-        pass
+        return self.call_function(self, fn)
 
-    # Part 2 -----------------------
+    def call_function(self, node, fn):
+        if node.left:
+            self.call_function(node.left, fn)
+        if node.right:
+            self.call_function(node.right, fn)
+        return fn(node.value)
 
-    # Print all the values in order from low to high
-    # Hint:  Use a recursive, depth first traversal
+        # Part 2 -----------------------
+
+        # Print all the values in order from low to high
+        # Hint:  Use a recursive, depth first traversal
+
     def in_order_print(self, node):
         pass
 
