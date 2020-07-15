@@ -16,7 +16,8 @@ class BSTNode:
         self.value = value
         self.left = None
         self.right = None
-
+    def __str__(self):
+        return str(self.value)
     # Insert the given value into the tree
     def insert(self, value):
         if value < self.value:
@@ -45,10 +46,10 @@ class BSTNode:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        if self.right:
-            return self.right.get_max()
-        else:
-            return self.value
+        current = self
+        while current.right:
+            current = current.right
+        return current.value
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
@@ -60,16 +61,30 @@ class BSTNode:
 
         # Part 2 -----------------------
 
-        # Print all the values in order from low to high
-        # Hint:  Use a recursive, depth first traversal
-
-    def in_order_print(self, node):
-        pass
+    # Print all the values in order from low to high
+    # Hint:  Use a recursive, depth first traversal
+    def in_order_print(self, node=None):
+        self = node or self
+        if self.left:
+            self.left.in_order_print()
+        print(self)
+        if self.right:
+            self.right.in_order_print()
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        if node is self:
+            print(self)
+        if node.left:
+            print(node.left)
+        if node.right:
+            print(node.right)
+        if node.left:
+            self.bft_print(node.left)
+        if node.right:
+            self.bft_print(node.right)
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
