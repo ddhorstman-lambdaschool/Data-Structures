@@ -19,35 +19,29 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        return self.insert_value(self, value)
-
-    def insert_value(self, node, value):
-        if value < node.value:
-            if node.left:
-                return self.insert_value(node.left, value)
+        if value < self.value:
+            if self.left:
+                return self.left.insert(value)
             else:
-                node.left = BSTNode(value)
+                self.left = BSTNode(value)
         else:
-            if node.right:
-                return self.insert_value(node.right, value)
+            if self.right:
+                return self.right.insert(value)
             else:
-                node.right = BSTNode(value)
+                self.right = BSTNode(value)
         return value
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        return self.search_for_value(self, target) is not None
-
-    def search_for_value(self, node, value):
-        if not node:
-            return None
-        if node.value == value:
-            return value
-        if node.value < value:
-            return self.search_for_value(node.right, value)
-        if node.value > value:
-            return self.search_for_value(node.left, value)
+        if self.value == target:
+            return True
+        elif self.value > target and self.left:
+            return self.left.contains(target)
+        elif self.value < target and self.right:
+            return self.right.contains(target)
+        else:
+            return False
 
     # Return the maximum value found in the tree
     def get_max(self):
@@ -58,14 +52,11 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        return self.call_function(self, fn)
-
-    def call_function(self, node, fn):
-        if node.left:
-            self.call_function(node.left, fn)
-        if node.right:
-            self.call_function(node.right, fn)
-        return fn(node.value)
+        if self.left:
+            self.left.for_each(fn)
+        if self.right:
+            self.right.for_each(fn)
+        return fn(self.value)
 
         # Part 2 -----------------------
 
