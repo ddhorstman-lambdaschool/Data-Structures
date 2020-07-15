@@ -11,7 +11,7 @@ class ListNode:
         self.next = next
 
     def __repr__(self):
-        return f"<ListNode: {self.value} >"
+        return f"<ListNode: {self.value}>"
 
 
 """

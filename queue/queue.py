@@ -37,7 +37,7 @@ class Queue:
     # This method puts new items on the bottom of an empty stack
     # and then flips the existing stack over on top of it.
     # Older items end up in the middle, newer ones radiate outwards.
-    # For example, a 6-item stack would look like: (top) 5 3 1 4 2 6 (bottom)
+    # For example, a 6-item stack would look like: (top) 5 3 1 2 4 6 (bottom)
     def enqueue(self, value):
         # Place on the bottom of an empty stack
         self.inactiveStack.push(value)
